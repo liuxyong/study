@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "ViewController.h"
+#import "MLNavigationController.h"
+#import <SDWebImageManager.h>
 @interface AppDelegate ()
 
 @end
@@ -16,7 +18,33 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [[SDWebImageManager sharedManager].imageDownloader setValue: nil forHTTPHeaderField:@"Accept"];
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    ViewController *VC = [[ViewController alloc]init];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];//返回字体颜色
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];//标题颜色
+    
+    //    [[UINavigationBar appearance] setTranslucent:YES];
+    //    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBarBg"] forBarMetrics:UIBarMetricsDefault];
+    
+    //    [[UINavigationBar appearance] setBackgroundColor:[UIColor colorWithRed:0.478 green:0.020 blue:0.039 alpha:1]];
+    //    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackOpaque];
+    //UInavigationBar背景颜色
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.86 green:0.23 blue:0.22 alpha:1]];
+    
+    //    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"navigationBarBg"]];
+    
+    //设置UINavigationBar的字体已经字体颜色
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIFont fontWithName:@"FZQingKeBenYueSongS-R-GB" size:16.0f],NSFontAttributeName,
+                                                          [UIColor whiteColor],NSForegroundColorAttributeName ,
+                                                          
+                                                          nil]];
+    MLNavigationController *nvc = [[MLNavigationController alloc]initWithRootViewController:VC];
+    self.window.rootViewController = nvc;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
